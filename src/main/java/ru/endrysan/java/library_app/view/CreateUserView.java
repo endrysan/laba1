@@ -1,25 +1,52 @@
 package ru.endrysan.java.library_app.view;
 
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import ru.endrysan.java.library_app.controller.CreateUserController;
 
 public class CreateUserView extends JFrame implements View {
 
-    private JTextField firstName;
-    private JTextField lastName;
-    private JCheckBox active;
-    private JButton addUser;
-    private JButton cancel;
+    public JButton buttonAddUser;
+    public JButton buttonCancel;
     
     public CreateUserView() {
-        firstName = new JTextField();
-        lastName = new JTextField();
-        active = new JCheckBox();
-        addUser = new JButton("add user");
-        cancel = new JButton("cancel");
+        super("Create User");
+        setPreferredSize(new Dimension(300, 180));
+        setResizable(false);
         
+        setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
+        
+        JPanel panelFrame = new JPanel(new GridLayout(2, 2, 5, 10));
+        
+        panelFrame.add(new JLabel("First name"));
+        panelFrame.add(new JTextField(10));
+        panelFrame.add(new JLabel("Last name"));
+        panelFrame.add(new JTextField(10));
+        
+        buttonAddUser = new JButton("add");
+        buttonCancel = new JButton("cancel");
+        JPanel panelButton = new JPanel();
+        panelButton.add(buttonAddUser);
+        panelButton.add(buttonCancel);
+        
+        add(panelFrame);
+        add(panelButton);
+        
+        CreateUserController userController = new CreateUserController(this);
+        buttonAddUser.addActionListener(userController);
+        buttonCancel.addActionListener(userController);
+        
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
         
     }
     @Override
