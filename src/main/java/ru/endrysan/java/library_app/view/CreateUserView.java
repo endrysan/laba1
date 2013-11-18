@@ -16,6 +16,9 @@ public class CreateUserView extends JFrame implements View {
 
     public JButton buttonAddUser;
     public JButton buttonCancel;
+    public JTextField fieldFirstName;
+    public JTextField fieldLastName;
+    public JLabel labelNotification;
     
     public CreateUserView() {
         super("Create User");
@@ -27,9 +30,14 @@ public class CreateUserView extends JFrame implements View {
         JPanel panelFrame = new JPanel(new GridLayout(2, 2, 5, 10));
         
         panelFrame.add(new JLabel("First name"));
-        panelFrame.add(new JTextField(10));
+        panelFrame.add(fieldLastName = new JTextField(10));
         panelFrame.add(new JLabel("Last name"));
-        panelFrame.add(new JTextField(10));
+        panelFrame.add(fieldLastName = new JTextField(10));
+        
+        JPanel panelNotification = new JPanel();
+        panelNotification.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        labelNotification = new JLabel("123413241234");
+        panelNotification.add(labelNotification);
         
         buttonAddUser = new JButton("add");
         buttonCancel = new JButton("cancel");
@@ -38,6 +46,7 @@ public class CreateUserView extends JFrame implements View {
         panelButton.add(buttonCancel);
         
         add(panelFrame);
+        add(panelNotification);
         add(panelButton);
         
         CreateUserController userController = new CreateUserController(this);
@@ -51,8 +60,11 @@ public class CreateUserView extends JFrame implements View {
     }
     @Override
     public void layoutYouself() {
-        // TODO Auto-generated method stub
         
+    }
+    
+    public static void main(String[] args) {
+        new CreateUserView();
     }
 
 }

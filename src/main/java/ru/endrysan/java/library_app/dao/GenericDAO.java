@@ -12,7 +12,7 @@ public interface GenericDAO<T extends Entity> {
     
     void change(T entity);
     
-    T get();
+    T getById(int id);
     
     List<T> getAll();
 }

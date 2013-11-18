@@ -16,6 +16,12 @@ public class CreateBookView extends JFrame implements View {
     
     public JButton buttonAddBook;
     public JButton buttonCancel;
+    public JLabel labelNotification;
+    public JTextField fieldAuthor;
+    public JTextField fieldTitle;
+    public JTextField fieldPublication;
+    public JTextField fieldPages;
+    public JTextField fieldGenre;
     
     public CreateBookView() {
         super("Create Book");
@@ -27,15 +33,19 @@ public class CreateBookView extends JFrame implements View {
         JPanel panelFrame = new JPanel(new GridLayout(5, 5, 5, 10));
         
         panelFrame.add(new JLabel("author"));
-        panelFrame.add(new JTextField(10));
+        panelFrame.add(fieldAuthor = new JTextField(10));
         panelFrame.add(new JLabel("title"));
-        panelFrame.add(new JTextField(10));
+        panelFrame.add(fieldTitle = new JTextField(10));
         panelFrame.add(new JLabel("publication"));
-        panelFrame.add(new JTextField(10));
+        panelFrame.add(fieldPublication = new JTextField(10));
         panelFrame.add(new JLabel("pages"));
-        panelFrame.add(new JTextField(10));
+        panelFrame.add(fieldPages = new JTextField(10));
         panelFrame.add(new JLabel("genre"));
-        panelFrame.add(new JTextField(10));
+        panelFrame.add(fieldGenre = new JTextField(10));
+        
+        JPanel panelNotification = new JPanel();
+        labelNotification = new JLabel("");
+        panelNotification.add(labelNotification);
         
         JPanel panelButton = new JPanel();
         buttonAddBook = new JButton("Add Book");
@@ -44,6 +54,7 @@ public class CreateBookView extends JFrame implements View {
         panelButton.add(buttonCancel);
         
         add(panelFrame);
+        add(panelNotification);
         add(panelButton);
         
         CreateBookController createBookController = new CreateBookController(this);
@@ -56,7 +67,6 @@ public class CreateBookView extends JFrame implements View {
     }
     @Override
     public void layoutYouself() {
-        // TODO Auto-generated method stub
         
     }
     public static void main(String[] args) {

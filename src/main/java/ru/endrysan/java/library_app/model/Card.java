@@ -1,6 +1,5 @@
 package ru.endrysan.java.library_app.model;
 
-import java.util.Date;
 
 public class Card implements Entity {
 
@@ -12,8 +11,8 @@ public class Card implements Entity {
     private User user;
     private Book book;
     private Status status;
-    private Date startDate;
-    private Date endDate;
+    private int startDate;
+    private int endDate;
     
     @Override
     public int getID() {
@@ -70,28 +69,28 @@ public class Card implements Entity {
     /**
      * @return the startDate
      */
-    public Date getStartDate() {
+    public int getStartDate() {
         return startDate;
     }
 
     /**
      * @param startDate the startDate to set
      */
-    public void setStartDate(Date startDate) {
+    public void setStartDate(int startDate) {
         this.startDate = startDate;
     }
 
     /**
      * @return the endDate
      */
-    public Date getEndDate() {
+    public int getEndDate() {
         return endDate;
     }
 
     /**
      * @param endDate the endDate to set
      */
-    public void setEndDate(Date endDate) {
+    public void setEndDate(int endDate) {
         this.endDate = endDate;
     }
 

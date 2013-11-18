@@ -1,7 +1,5 @@
 package ru.endrysan.java.library_app.model;
 
-import java.util.Date;
-
 public class Book implements Entity {
 
     public enum Genre {
@@ -14,7 +12,7 @@ public class Book implements Entity {
     private int id;
     private String author;
     private String title;
-    private Date publication;
+    private int publication;
     private int pages;
     private Genre genre;
     
@@ -44,11 +42,11 @@ public class Book implements Entity {
         this.title = title;
     }
 
-    public Date getPublication() {
+    public int getPublication() {
         return publication;
     }
 
-    public void setPublication(Date publication) {
+    public void setPublication(int publication) {
         this.publication = publication;
     }
 

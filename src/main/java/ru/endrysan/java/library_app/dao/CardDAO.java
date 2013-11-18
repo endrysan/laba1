@@ -1,15 +1,75 @@
 package ru.endrysan.java.library_app.dao;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import ru.endrysan.java.library_app.model.Card;
+import ru.endrysan.java.library_app.model.Card.Status;
 
 public class CardDAO implements GenericDAO<Card> {
 
+    public static final String filename = "card.txt";
+    private File file;
+    private UserDAO user = new UserDAO();
+    private BookDAO book = new BookDAO();
+    
+    public CardDAO() {
+        file = new File(filename);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
     @Override
-    public void save(Card entity) {
-        // TODO Auto-generated method stub
-        
+    public void save(Card card) {
+        int lastCardId = 0;
+        List<Card> cards = new ArrayList<Card>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            
+            for (String s = reader.readLine(); s != null; s = reader.readLine()) {
+                Card newCard = new Card();
+                int cardId = Integer.parseInt(s);
+                if (cardId > lastCardId) {
+                    lastCardId = cardId;
+                }
+                newCard.setID(cardId);
+                newCard.setUser(user.getById(cardId));
+                newCard.setBook(book.getById(cardId));
+                newCard.setStatus(Status.valueOf(reader.readLine()));
+                newCard.setStartDate(Integer.parseInt(reader.readLine()));
+                newCard.setEndDate(Integer.parseInt(reader.readLine()));
+                cards.add(newCard);
+            }
+            card.setID(lastCardId + 1);
+            cards.add(card);
+            reader.close();
+            
+            FileWriter writer = new FileWriter(file);
+            for (Card c : cards) {
+                writer.write(c.getID() + "\n");
+                writer.write(c.getUser() + "\n");
+                writer.write(c.getBook() + "\n");
+                writer.write(c.getStatus() + "\n");
+                writer.write(c.getStartDate() + "\n");
+                writer.write(c.getEndDate() + "\n");
+            }
+            writer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -24,16 +84,63 @@ public class CardDAO implements GenericDAO<Card> {
     }
 
     @Override
-    public Card get() {
-        // TODO Auto-generated method stub
+    public Card getById(int id) {
+        List<Card> listCard = new ArrayList<Card>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            
+            for (String s = reader.readLine(); s != null; s = reader.readLine()) {
+                Card newCard = new Card();
+                int cardId = Integer.parseInt(s);
+                newCard.setID(cardId);
+                newCard.setUser(user.getById(cardId));
+                newCard.setBook(book.getById(cardId));
+                newCard.setStatus(Status.valueOf(reader.readLine()));
+                newCard.setStartDate(Integer.parseInt(reader.readLine()));
+                newCard.setEndDate(Integer.parseInt(reader.readLine()));
+                listCard.add(newCard);
+            }
+            reader.close();
+            
+            for (Card u: listCard) {
+                if (id == u.getID()) {
+                    return u;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public List<Card> getAll() {
-        // TODO Auto-generated method stub
-        return null;
+        List<Card> listCard = new ArrayList<Card>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            
+            for (String s = reader.readLine(); s != null; s = reader.readLine()) {
+                Card newCard = new Card();
+                int cardId = Integer.parseInt(s);
+                newCard.setID(cardId);
+                newCard.setUser(user.getById(cardId));
+                newCard.setBook(book.getById(cardId));
+                newCard.setStatus(Status.valueOf(reader.readLine()));
+                newCard.setStartDate(Integer.parseInt(reader.readLine()));
+                newCard.setEndDate(Integer.parseInt(reader.readLine()));
+                listCard.add(newCard);
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listCard;
     }
 
-    
 }

@@ -40,7 +40,5 @@ public class User implements Entity {
     public void setActive(boolean active) {
         this.active = active;
     }
-    
-    
 
 }
