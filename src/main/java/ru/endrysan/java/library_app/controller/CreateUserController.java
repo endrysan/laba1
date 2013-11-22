@@ -7,6 +7,7 @@ import java.util.List;
 
 import ru.endrysan.java.library_app.model.User;
 import ru.endrysan.java.library_app.dao.UserDAO;
+import ru.endrysan.java.library_app.services.UserService;
 import ru.endrysan.java.library_app.view.CreateUserView;
 
 public class CreateUserController implements ActionListener {
@@ -33,10 +34,10 @@ public class CreateUserController implements ActionListener {
         String displayFieldTextLastName = parentCreateUserView.fieldLastName.getText();
         
         User newUser = new User();
-        UserDAO user = new UserDAO();
+        UserService userService = new UserService(true);
         List<User> listUser = new ArrayList<User>();
         
-        listUser.addAll(user.getAll());
+        listUser.addAll(userService.getAll());
         
         for (User u : listUser) {
             if ("".equals(displayFieldTextFirstName) || "".equals(displayFieldTextFirstName)) {
@@ -50,7 +51,7 @@ public class CreateUserController implements ActionListener {
             else {
                 newUser.setFirstName(displayFieldTextFirstName);
                 newUser.setLastName(displayFieldTextLastName);
-                user.save(newUser);
+                userService.save(newUser);
                 parentCreateUserView.setVisible(false);
             }
             

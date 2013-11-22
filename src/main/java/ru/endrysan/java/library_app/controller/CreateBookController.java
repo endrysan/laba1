@@ -8,11 +8,12 @@ import java.util.List;
 import ru.endrysan.java.library_app.dao.BookDAO;
 import ru.endrysan.java.library_app.model.Book;
 import ru.endrysan.java.library_app.model.Book.Genre;
+import ru.endrysan.java.library_app.services.BookService;
 import ru.endrysan.java.library_app.view.CreateBookView;
 
 public class CreateBookController implements ActionListener {
     
-    CreateBookView parentCreateBookView;
+    private CreateBookView parentCreateBookView;
     
     public CreateBookController(CreateBookView parentCreateBookView) {
         this.parentCreateBookView = parentCreateBookView;
@@ -32,10 +33,10 @@ public class CreateBookController implements ActionListener {
 
     private void onAddBook(ActionEvent e) {
         Book newBook = new Book();
-        BookDAO book = new BookDAO();
+        BookService bookService = new BookService(true);
         List<Book> listBook = new ArrayList<Book>();
         
-        listBook.addAll(book.getAll());
+        listBook.addAll(bookService.getAll());
         
         for (Book b : listBook) {
             if ("".equals(parentCreateBookView.fieldAuthor) || "".equals(parentCreateBookView.fieldTitle) || 
@@ -49,7 +50,7 @@ public class CreateBookController implements ActionListener {
                 newBook.setPublication(Integer.parseInt(parentCreateBookView.fieldPublication.getText()));
                 newBook.setPages(Integer.parseInt(parentCreateBookView.fieldPages.getText()));
                 newBook.setGenre(Genre.valueOf(parentCreateBookView.fieldGenre.getText()));
-                book.save(newBook);
+                bookService.save(newBook);
                 parentCreateBookView.setVisible(false);
             }
         }
