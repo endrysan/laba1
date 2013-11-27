@@ -1,35 +1,37 @@
 package ru.endrysan.java.library_app.view;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
 
-import ru.endrysan.java.library_app.controller.MainController;
+import ru.endrysan.java.library_app.controller.ViewBookController;
+import ru.endrysan.java.library_app.dao.BookDAO;
+import ru.endrysan.java.library_app.model.Book;
 
 public class ViewBook extends JFrame implements View {
     
     public ViewBook() {
         super("View Book");
-        setPreferredSize(new Dimension(300, 180));
-        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 
+        List<Book> books = new ArrayList<Book>();
+        BookDAO bookDAO = BookDAO.getInstance();
+        books.addAll(bookDAO.getAll());
         
-        setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
-        
-        JPanel panelFrame = new JPanel(new GridLayout(2, 2, 5, 10));
-        
-        
+        TableModel model = new ViewBookController(books);
+        JTable table = new JTable(model);
+ 
+        getContentPane().add(new JScrollPane(table));
+ 
+        setPreferredSize(new Dimension(460, 220));
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    @Override
-    public void layoutYouself() {
-        // TODO Auto-generated method stub
-        
-    }
 }

@@ -6,11 +6,8 @@ import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-import ru.endrysan.java.library_app.controller.CreateBookController;
 import ru.endrysan.java.library_app.controller.MainController;
 
 public class MainView extends JFrame implements View {
@@ -50,10 +47,5 @@ public class MainView extends JFrame implements View {
         new MainView();
     }
 
-    @Override
-    public void layoutYouself() {
-        // TODO Auto-generated method stub
-        
-    }
 
 }

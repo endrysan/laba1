@@ -9,17 +9,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+
 import ru.endrysan.java.library_app.model.Card;
 import ru.endrysan.java.library_app.model.Card.Status;
 
 public class CardDAO implements GenericDAO<Card> {
 
-    public static final String filename = "card.txt";
+    private UserDAO user = UserDAO.getInstance();
+    private BookDAO book = BookDAO.getInstance(); 
     private File file;
-    private UserDAO user = new UserDAO();
-    private BookDAO book = new BookDAO();
+    private static String filename;
+    private static CardDAO instance;
     
-    public CardDAO() {
+    private CardDAO() {
+    }
+    
+    private CardDAO(String filename) {
+        this.filename = filename;
         file = new File(filename);
         if (!file.exists()) {
             try {
@@ -28,6 +38,20 @@ public class CardDAO implements GenericDAO<Card> {
                 e.printStackTrace();
             }
         }
+    }
+    
+    public static CardDAO getInstance() {
+        if (instance == null) {
+            instance = new CardDAO();
+        }
+        return instance;
+    }
+    
+    public static CardDAO getInstance(String filename) {
+        if (instance == null) {
+            instance = new CardDAO(filename);
+        }
+        return instance;
     }
     
     @Override

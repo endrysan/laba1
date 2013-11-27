@@ -7,13 +7,34 @@ import ru.endrysan.java.library_app.dao.CardDAO;
 import ru.endrysan.java.library_app.model.Card;
 
 public class CardService {
-    private boolean useCache;
+    
+    private static CardService instance;
+    private static boolean useCache;
     private Cache cache;
     private CardDAO cardDAO;
-    public CardService(boolean useCache) {
+    
+    private CardService() {
+        
+    }
+    
+    private CardService(boolean useCache) {
         this.useCache = useCache;
         cache = Cache.getInstance();
-        cardDAO = new CardDAO();
+        cardDAO = CardDAO.getInstance();
+    }
+    
+    public static CardService getInstance(boolean useCache) {
+        if (instance == null) {
+            instance = new CardService(useCache);
+        }
+        return instance;
+    }
+    
+    public static CardService getInstance() {
+        if (instance == null) {
+            instance = new CardService();
+        }
+        return instance;
     }
     public void save(Card card) {
         if (useCache) {

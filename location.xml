@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<app>
+  <config>
+    <datasources useCache="false" type="file">
+      <fileLocation users="C:\users.txt" />
+      <fileLocation books="C:\books.txt"/>
+      <fileLocation cards="C:\cards.txt"/>
+    </datasources>
+  </config>
+</app>

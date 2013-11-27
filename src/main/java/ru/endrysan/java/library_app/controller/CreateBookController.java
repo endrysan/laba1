@@ -33,15 +33,15 @@ public class CreateBookController implements ActionListener {
 
     private void onAddBook(ActionEvent e) {
         Book newBook = new Book();
-        BookService bookService = new BookService(true);
+        BookService bookService = BookService.getInstance();
         List<Book> listBook = new ArrayList<Book>();
         
         listBook.addAll(bookService.getAll());
         
         for (Book b : listBook) {
-            if ("".equals(parentCreateBookView.fieldAuthor) || "".equals(parentCreateBookView.fieldTitle) || 
-                    "".equals(parentCreateBookView.fieldPublication) || "".equals(parentCreateBookView.fieldPages) ||
-                    "".equals(parentCreateBookView.fieldGenre)) {
+            if ("".equals(parentCreateBookView.fieldAuthor.getText()) || "".equals(parentCreateBookView.fieldTitle.getText()) || 
+                    "".equals(parentCreateBookView.fieldPublication.getText()) || "".equals(parentCreateBookView.fieldPages.getText()) ||
+                    "".equals(parentCreateBookView.fieldGenre.getText())) {
                 parentCreateBookView.labelNotification.setText("input all fields");
             }
             else {

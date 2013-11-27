@@ -32,15 +32,17 @@ public class CreateUserController implements ActionListener {
     private void onAddUser(ActionEvent e) {
         String displayFieldTextFirstName = parentCreateUserView.fieldFirstName.getText();
         String displayFieldTextLastName = parentCreateUserView.fieldLastName.getText();
+        boolean displayFieldTextActivity = Boolean.parseBoolean(parentCreateUserView.fieldActivity.getText());
         
         User newUser = new User();
-        UserService userService = new UserService(true);
+        UserService userService = UserService.getInstance();
         List<User> listUser = new ArrayList<User>();
         
         listUser.addAll(userService.getAll());
         
         for (User u : listUser) {
-            if ("".equals(displayFieldTextFirstName) || "".equals(displayFieldTextFirstName)) {
+            if ("".equals(displayFieldTextFirstName) || "".equals(displayFieldTextFirstName) || 
+                "".equals(displayFieldTextActivity)) {
                 parentCreateUserView.labelNotification.setText("input all fields");
                 break;
             }
@@ -51,6 +53,7 @@ public class CreateUserController implements ActionListener {
             else {
                 newUser.setFirstName(displayFieldTextFirstName);
                 newUser.setLastName(displayFieldTextLastName);
+                newUser.setActive(displayFieldTextActivity);
                 userService.save(newUser);
                 parentCreateUserView.setVisible(false);
             }

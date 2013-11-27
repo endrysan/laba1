@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import ru.endrysan.java.library_app.view.CreateBookView;
 import ru.endrysan.java.library_app.view.CreateUserView;
 import ru.endrysan.java.library_app.view.MainView;
+import ru.endrysan.java.library_app.view.ViewBook;
+import ru.endrysan.java.library_app.view.ViewUser;
 
 public class MainController implements ActionListener {
     MainView parentMainView;
@@ -17,10 +19,10 @@ public class MainController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == parentMainView.buttonViewUser) {
-//            new ViewUser();
+            new ViewUser();
         }
         if(e.getSource() == parentMainView.buttonViewBook) {
-//            new ViewBook();
+            new ViewBook();
         }
         if (e.getSource() == parentMainView.buttonCreateUser) {
             new CreateUserView();

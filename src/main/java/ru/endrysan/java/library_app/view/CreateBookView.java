@@ -30,7 +30,7 @@ public class CreateBookView extends JFrame implements View {
         
         setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
         
-        JPanel panelFrame = new JPanel(new GridLayout(5, 5, 5, 10));
+        JPanel panelFrame = new JPanel(new GridLayout(6, 6, 5, 10));
         
         panelFrame.add(new JLabel("author"));
         panelFrame.add(fieldAuthor = new JTextField(10));
@@ -42,10 +42,7 @@ public class CreateBookView extends JFrame implements View {
         panelFrame.add(fieldPages = new JTextField(10));
         panelFrame.add(new JLabel("genre"));
         panelFrame.add(fieldGenre = new JTextField(10));
-        
-        JPanel panelNotification = new JPanel();
-        labelNotification = new JLabel("");
-        panelNotification.add(labelNotification);
+        panelFrame.add(labelNotification = new JLabel(""));
         
         JPanel panelButton = new JPanel();
         buttonAddBook = new JButton("Add Book");
@@ -54,7 +51,6 @@ public class CreateBookView extends JFrame implements View {
         panelButton.add(buttonCancel);
         
         add(panelFrame);
-        add(panelNotification);
         add(panelButton);
         
         CreateBookController createBookController = new CreateBookController(this);
@@ -65,10 +61,7 @@ public class CreateBookView extends JFrame implements View {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    @Override
-    public void layoutYouself() {
-        
-    }
+
     public static void main(String[] args) {
         new CreateBookView();
     }

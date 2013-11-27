@@ -9,15 +9,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+
 import ru.endrysan.java.library_app.model.Book;
 import ru.endrysan.java.library_app.model.Book.Genre;
 
 public class BookDAO implements GenericDAO<Book> {
-
-    public static final String filename = "book.txt";
-    private File file;
     
-    public BookDAO() {
+    private File file;
+    private static String filename;
+    private static BookDAO instance;
+    
+    private BookDAO() {
+    }
+    
+    private BookDAO(String filename) {
+        this.filename = filename;
         file = new File(filename);
         if (!file.exists()) {
             try {
@@ -26,6 +36,20 @@ public class BookDAO implements GenericDAO<Book> {
                 e.printStackTrace();
             }
         }
+    }
+    
+    public static BookDAO getInstance() {
+        if (instance == null) {
+            instance = new BookDAO();
+        }
+        return instance;
+    }
+    
+    public static BookDAO getInstance(String filename) {
+        if (instance == null) {
+            instance = new BookDAO(filename);
+        }
+        return instance;
     }
     @Override
     public void save(Book book) {

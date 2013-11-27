@@ -6,7 +6,8 @@ public class Book implements Entity {
         DRAMA,
         FANTASY,
         MYSTERY,
-        DETECTIVE
+        DETECTIVE,
+        ROMANCE
     }
     
     private int id;

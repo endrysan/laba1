@@ -18,25 +18,28 @@ public class CreateUserView extends JFrame implements View {
     public JButton buttonCancel;
     public JTextField fieldFirstName;
     public JTextField fieldLastName;
+    public JTextField fieldActivity;
     public JLabel labelNotification;
     
     public CreateUserView() {
         super("Create User");
-        setPreferredSize(new Dimension(300, 180));
+        setPreferredSize(new Dimension(300, 200));
         setResizable(false);
         
         setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
         
-        JPanel panelFrame = new JPanel(new GridLayout(2, 2, 5, 10));
+        JPanel panelFrame = new JPanel(new GridLayout(3, 3, 5, 10));
         
         panelFrame.add(new JLabel("First name"));
-        panelFrame.add(fieldLastName = new JTextField(10));
+        panelFrame.add(fieldFirstName = new JTextField(10));
         panelFrame.add(new JLabel("Last name"));
         panelFrame.add(fieldLastName = new JTextField(10));
+        panelFrame.add(new JLabel("Activity"));
+        panelFrame.add(fieldActivity = new JTextField(10));
         
         JPanel panelNotification = new JPanel();
-        panelNotification.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 0));
-        labelNotification = new JLabel("123413241234");
+        panelNotification.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        labelNotification = new JLabel("");
         panelNotification.add(labelNotification);
         
         buttonAddUser = new JButton("add");
@@ -56,10 +59,6 @@ public class CreateUserView extends JFrame implements View {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
-        
-    }
-    @Override
-    public void layoutYouself() {
         
     }
     

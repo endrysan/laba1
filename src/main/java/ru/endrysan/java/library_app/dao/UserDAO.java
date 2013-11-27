@@ -13,10 +13,15 @@ import ru.endrysan.java.library_app.model.User;
 
 public class UserDAO implements GenericDAO<User> {
 
-    public static final String filename = "user.txt";
     private File file;
+    private static String filename;
+    private static UserDAO instance;
     
-    public UserDAO() {
+    private UserDAO() {
+    }
+    
+    private UserDAO(String filename) {
+        this.filename = filename;
         file = new File(filename);
         if (!file.exists()) {
             try {
@@ -25,6 +30,20 @@ public class UserDAO implements GenericDAO<User> {
                 e.printStackTrace();
             }
         }
+    }
+    
+    public static UserDAO getInstance() {
+        if (instance == null) {
+            instance = new UserDAO();
+        }
+        return instance;
+    }
+    
+    public static UserDAO getInstance(String filename) {
+        if (instance == null) {
+            instance = new UserDAO(filename);
+        }
+        return instance;
     }
     @Override
     public void save(User user) {
